@@ -70,6 +70,10 @@ public class FlutterOverlayWindowPlugin implements
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
                 intent.setData(Uri.parse("package:" + mActivity.getPackageName()));
                 mActivity.startActivityForResult(intent, REQUEST_CODE_FOR_OVERLAY_PERMISSION);
+                boolean noAnimation = call.argument("noAnimation") != null ? call.argument("noAnimation") : false;
+                if (noAnimation) {
+                    mActivity.overridePendingTransition(0, 0);
+                }
             } else {
                 result.success(true);
             }
